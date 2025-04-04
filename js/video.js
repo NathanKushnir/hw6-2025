@@ -53,6 +53,7 @@ document.querySelector('#skip').addEventListener('click', function(){
 });
 
 //mute
+/*
 document.querySelector('#mute').addEventListener('click', function(){
 	//default volume is max
 	let previousVolume = 1;
@@ -80,11 +81,34 @@ document.querySelector('#mute').addEventListener('click', function(){
 		document.querySelector("#slider").value = previousVolume * 100;
 		document.querySelector('#mute').innerText = 'Mute';
 	}
+});*/
+
+document.querySelector('#mute').addEventListener('click', function(){
+	//default volume is max
+	let previousVolume = 1;
+
+	//going from unmute to mute
+	if (video.muted == false){
+		console.log('Video muted')
+		//store original value
+		previousVolume = video.volume;
+		video.muted = true;
+		video.volume = 0;
+		document.querySelector('#mute').innerText = 'Unmute'
+	}
+	//going from mute back to unmute
+	else{
+		console.log('Video unmuted')
+		video.muted = false;
+		video.volume = previousVolume;
+		document.querySelector('#mute').innerText = 'Mute';
+	}
 });
+
 
 //change the volume based on the slider
 document.querySelector("#slider").addEventListener('change', function(){
-	console.log('slider changed');
+	console.log('Slider changed');
 	let new_vol = document.querySelector("#slider").value;
 	video.volume = new_vol / 100;
 	document.querySelector("#volume").textContent = `${new_vol}%`;
